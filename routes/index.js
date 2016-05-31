@@ -8,12 +8,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Timestamp microservice' });
 });
 
-router.get('/*/*', function(req, res, next) {
-  res.send('adeus');
+router.get('/:val/*', function(req, res, next) {
+	var value = timestamp(req.params.val);
+	res.send({unix: value.unix(), natural: value.natural()});
 });
 
-router.get('/*', function(req, res, next) {
-  res.send('olá');
+router.get('/:val', function(req, res, next) {
+	var value = timestamp(req.params.val);
+	res.send({unix: value.unix(), natural: value.natural()});
 });
 
 module.exports = router;
